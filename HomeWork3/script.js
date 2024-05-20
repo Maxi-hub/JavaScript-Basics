@@ -1,19 +1,24 @@
 // Задание 1
 // Создайте функцию которая возводит переданное число в куб, необходимо вывести в консоль результат 2^3 степени + 3 ^ 3 степени
 
-const cubingNumber = (number1, number2) => console.log((number1 ** 3) + (number2 ** 3));
-cubingNumber(2, 3);
+const cubingNumber = (number1, number2) => (number1 ** 3) + (number2 ** 3);
+console.log(cubingNumber(2, 3));
 
 // Задание 2
 // Пользователь вводит с клавиатуры число, если ввёл текст, необходимо вывести что значение задано неверно
 // Создать фукнцию, которая высчитывает 13% от данного числа и выводит в консоль текст "Размер заработной платы за вычетом налогов равен значение"
 
-let getNumber = +prompt("Введите число");
+let getNumber = +prompt("Введите размер вашей заработной платы");
 const salaryAfterTax = (number) => {
-    console.log((getNumber !== Number(getNumber)) ? `значение задано неверно` : `Размер заработной платы за вычетом налогов равен ${getNumber - getNumber * 0.13}`);
+    if (getNumber !== Number(getNumber)) {
+        return (`значение задано неверно`);
+    }
+    else {
+        return (`Размер заработной платы за вычетом налогов равен ${getNumber - getNumber * 0.13}`);
+    }
 }
 
-salaryAfterTax(getNumber);
+console.log(salaryAfterTax(getNumber));
 
 
 // Задание 3
@@ -23,11 +28,11 @@ const number2 = +prompt('Введите число 2');
 const number3 = +prompt('Введите число 3');
 const getMaxNumber = (number1, number2, number3) => {
     if (number1 > number2 && number1 > number3) {
-        console.log(`${number1} maximum`);
+        console.log(`${number1} максимальное число`);
     } else if (number2 > number1 && number2 > number3) {
-        console.log(`${number2} maximum`);
+        console.log(`${number2} максимальное число`);
     } else {
-        console.log(`${number3} maximum`);
+        console.log(`${number3} максимальное число`);
     }
 }
 
@@ -47,7 +52,7 @@ const differenceNumbers = (number1, number2) => { return(number1 > number2) ? nu
 const multiplicationNumbers = (number1, number2) => { return number1 * number2 }
 const dividingNumbers = (number1, number2) => { return(number1 > number2) ? number1 / number2 : number2 / number1 }
 
-console.log(sumNumbers(2, 6)); 
-console.log(differenceNumbers(6, 6)); 
-console.log(multiplicationNumbers(3, 6)); 
+console.log(sumNumbers(2, 6));
+console.log(differenceNumbers(6, 6));
+console.log(multiplicationNumbers(3, 6));
 console.log(dividingNumbers(4, 6)); 
