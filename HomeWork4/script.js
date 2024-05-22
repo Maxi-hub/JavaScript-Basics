@@ -74,6 +74,8 @@ function getRandomNumbersInRange(min, max, count) {
         else {
             console.log(`В массиве нет числа 3`);
         }
+        // или console.log((array.indexOf(3) !== -1) ? `В массиве есть число 3` : `В массиве нет числа 3`); 
+        
     }
 }
 
