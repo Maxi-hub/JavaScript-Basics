@@ -25,19 +25,26 @@ const formEl = document.querySelector('form');
 const buttonEl = formEl.querySelector('button');
 const inputFormEl = formEl.querySelectorAll('.form-control');
 
-
 buttonEl.addEventListener('click', function (e) {
     e.preventDefault();
+
+    let allFieldsFilled = true;
     inputFormEl.forEach(element => {
         if (element.value === '') {
             element.classList.add('error');
             element.style.border = '3px solid red';
+            allFieldsFilled = false;
         } else {
             element.classList.remove('error');
             element.style.border = '1px solid black';
         }
     })
+    if(allFieldsFilled){
+        formEl.submit();
+    }
 });
+
+
 
 
 
