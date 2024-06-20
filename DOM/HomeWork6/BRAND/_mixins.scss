@@ -1,0 +1,29 @@
+@mixin flex ($display, $jc, $ai) {
+    display: $display;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin square ($colorSquare) {
+    width: 12px;
+    height: 12px;
+    background-color: $colorSquare;
+    margin-right: 11px;
+    margin-top: 5px;
+}
+
+@mixin sortStyle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #6F6E6E;
+}
+
+@mixin conditionStyle {
+    color: #FBFBFB;
+    font-size: 19.96px;
+    font-weight: 400;
+    height: 24px;
+    margin-bottom: 16px;
+}
