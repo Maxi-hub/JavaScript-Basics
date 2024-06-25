@@ -232,6 +232,7 @@ li {
   height: 10px;
   margin-left: 42px;
   margin-top: 26px;
+  cursor: pointer;
 }
 .heading__bucket-total {
   font-size: 16px;
@@ -274,7 +275,7 @@ li {
   line-height: 1.2;
   font-weight: 700;
   text-transform: uppercase;
-  margin: 0 20px;
+  margin: 0 20px 10px;
   text-align: center;
 }
 .heading__goToCart:hover {
@@ -1811,6 +1812,10 @@ li {
 .product__left {
   display: flex;
   gap: 20px;
+}
+.product__left img {
+  width: 100px;
+  height: 115px;
 }
 .product__details {
   padding-top: 10px;

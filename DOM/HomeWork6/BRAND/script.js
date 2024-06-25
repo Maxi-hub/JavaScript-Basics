@@ -4,7 +4,6 @@ async function fetchData(url) {
     try {
         const response = await fetch(url);
         const jsData = await response.json();
-        // console.log(jsData);
         return jsData;
     } catch (error) {
         console.log(error.message);
@@ -12,6 +11,7 @@ async function fetchData(url) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    localStorage.clear();
     const data = await fetchData(url);
     const closesBoxEl = document.querySelector('.closes__box');
 
@@ -33,34 +33,57 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
         </div>
         `)
-        
+    })
 
-        closesBoxEl.addEventListener("click", (ev) => {
-            localStorage.setItem(`${el.id}`, JSON.stringify(el));
+    document.querySelectorAll('.add-box').forEach((addBox, index) => {
+        addBox.addEventListener('click', () => {
+            const selectedProduct = data[index];
+            const headingBucketBox = document.querySelector('.heading__bucket-box');
+            let count = 1;
 
-            if (ev.target.closest(".add-box")) {
-                const item = ev.target.closest(".closes__items");
-                if (item) {
-                    const headingBucketBox = document.querySelector('.heading__bucket-box');
-                    headingBucketBox.insertAdjacentHTML('afterbegin', `
-                    <div class="heading__bucket-items">
+            if (localStorage.getItem(index + 1)) {
+                const existingProduct = JSON.parse(localStorage.getItem(index + 1));
+                count = existingProduct.count + 1;
+                existingProduct.count = count;
+                localStorage.setItem(index + 1, JSON.stringify(existingProduct));
+
+                const existingItem = document.querySelector(`.heading__bucket-items[data-id="${selectedProduct.id}"]`);
+                if (existingItem) {
+                    existingItem.querySelector('.heading__bucket-price').textContent = `${count} x $${selectedProduct.price}`;
+                }
+            } else {
+                selectedProduct.count = count;
+                localStorage.setItem(index + 1, JSON.stringify(selectedProduct));
+                headingBucketBox.insertAdjacentHTML('afterbegin', `
+                    <div class="heading__bucket-items" data-id="${selectedProduct.id}">
                         <a href="single_page.html">
-                        <img class="heading__bucket-item" src="${el.img}" alt="">
+                            <img class="heading__bucket-item" src="${selectedProduct.img}" alt=""></img>
                         </a>
                         <div class="heading__bucket-text">
-                        <h5 class="heading__bucket-title">${el.title}</h5>
-                        <img class="heading__bucket-stars" src="img/stars.png" alt="">
-                        <p class="heading__bucket-price">1 x $${el.price}</p>
+                            <h5 class="heading__bucket-title">${selectedProduct.title}</h5>
+                            <img class="heading__bucket-stars" src="img/stars.png" alt=""></img>
+                            <p class="heading__bucket-price">${count} x $${selectedProduct.price}</p>
                         </div>
-                        <img class="heading__bucket-close" src="img/button_close.png" alt="">
+                        <img class="heading__bucket-close" src="img/button_close.png" alt=""></img>
                     </div>
-                    `)
-                }
+                    `
+                );
             }
+        })
+    })
 
+    const headingBucketBox = document.querySelector('.heading__bucket-box');
+    headingBucketBox.addEventListener("click", ev => {
+        if (ev.target.closest('.heading__bucket-close')) {
+            const item = ev.target.closest(".heading__bucket-items");
+            if (item) {
+                item.remove();
+            }
         }
-
-        )
     })
 
 });
+
+
+
+
