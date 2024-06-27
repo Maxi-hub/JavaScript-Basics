@@ -11,7 +11,7 @@ async function fetchData(url) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    localStorage.clear();
+    // localStorage.clear();
     const data = await fetchData(url);
     const closesBoxEl = document.querySelector('.closes__box');
 
@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const item = ev.target.closest(".heading__bucket-items");
             if (item) {
                 item.remove();
+                localStorage.removeItem(item.dataset.id);
             }
         }
     })
