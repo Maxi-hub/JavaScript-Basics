@@ -11,17 +11,34 @@
 // book.displayInfo(); // "Title: BookName1, Author: Author1, Pages: 123"
 
 class Book {
-    title = 'The old man and the sea';
-    author = 'Ernest Hemingway';
-    pages = 320;
+    constructor(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+    }
 
-    displayInfo() {
+        displayInfo() {
         console.log(`Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}`);
     }
 }
 
-const book = new Book();
+const book = new Book('The old man and the sea', 'Ernest Hemingway', 320);
 book.displayInfo();
+
+
+// определенная книга
+// class Book {
+//     title = 'The old man and the sea';
+//     author = 'Ernest Hemingway';
+//     pages = 320;
+
+//     displayInfo() {
+//         console.log(`Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}`);
+//     }
+// }
+
+// const book = new Book();
+// book.displayInfo();
 
 
 // Задание 2: "Управление списком студентов"
@@ -54,7 +71,7 @@ class Student {
             throw new Error(`Вы ввели некорректный возраст`);
         }
     }
-};
+}
 
 const student = new Student("John Smith", 17, "10th grade");
 student.checkAgeIsNumber();
