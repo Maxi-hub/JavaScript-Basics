@@ -23,7 +23,6 @@ class Employee {
     displayInfo() {
         console.log(`Name: ${this.name}`);
     }
-
 }
 
 class Manager extends Employee {
@@ -69,8 +68,74 @@ manager.displayInfo();
 // console.log(order.getTotalPrice()); // Вывод: 1100
 
 
+// class Product {
+//     constructor(name, price, quantity) {
+//         this.name = name;
+//         this.price = price;
+//         this.quantity = quantity;
+//     }
+// }
+
+// class Order {
+//     products = [];
+
+//     constructor(id) {
+//         this.id = id;
+//     }
+
+//     addProduct(product) {
+//         this.products.push(product);
+//     }
+
+//     getTotalPrice() {
+//         let totalPrice = 0;
+
+//         this.products.map(function (product) {
+//             if (!Number.isFinite(product.price)) {
+//                 throw new Error(`Ошибка, вы ввели не число в стоимости продукта ${product.name}`);
+//             }
+//             else if (!Number.isFinite(product.quantity)) {
+//                 throw new Error(`Ошибка, вы ввели не число в количестве продукта ${product.name}`);
+//             }
+//             else if (product.price <= 0) {
+//                 throw new Error(`Введена неверная стоимость продукта ${product.name}`);
+//             }
+//             else if (product.quantity <= 0) {
+//                 throw new Error(`Указано некорректное количество продукта ${product.name}`);
+//             }
+//         });
+
+//         totalPrice = this.products.reduce(function (sum, product) {
+//             return sum + product.price * product.quantity
+//         }, 0)
+        
+//         return `Общая сумма заказа: ${totalPrice}`;
+//     }
+// }
+
+// const order = new Order(1);
+
+// const product1 = new Product("Phone", 500, 2);
+// order.addProduct(product1);
+
+// const product2 = new Product("Headphones", 100, 1);
+// order.addProduct(product2);
+
+// console.log(order.getTotalPrice());
+
+
+
+//Проверки, которые вы делали в getTotalPrice нужны не там, они нужны при попытке создать объект и добавить значения в объект, то есть, id нужно проверять в конструкторе и в addProduct нужно проверять что передали product, также в конструкторе Product проверять все значения. В getTotalPrice уже ничего проверять не нужно.
+// Советую стрелочные функции использовать для методов массива.
+// От getTotalPrice я бы ожидал числа, а не строки. Строку можно потом собрать любую, какую захотим.
 class Product {
     constructor(name, price, quantity) {
+        if (!Number.isFinite(price) || price <= 0) {
+            throw new Error(`Ошибка: неверная стоимость продукта ${name}`);
+        }
+        if (!Number.isFinite(quantity) || quantity <= 0) {
+            throw new Error(`Ошибка: некорректное количество продукта ${name}`);
+        }
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -79,38 +144,23 @@ class Product {
 
 class Order {
     products = [];
-
+    
     constructor(id) {
+        if (!Number.isFinite(id) || id <= 0) {
+            throw new Error(`Ошибка: неверный идентификатор заказа`);
+        }
         this.id = id;
     }
 
     addProduct(product) {
+        if (!product || !(product instanceof Product)) {
+            throw new Error(`Ошибка: передан некорректный продукт`);
+        }
         this.products.push(product);
     }
 
     getTotalPrice() {
-        let totalPrice = 0;
-
-        this.products.map(function (product) {
-            if (!Number.isFinite(product.price)) {
-                throw new Error(`Ошибка, вы ввели не число в стоимости продукта ${product.name}`);
-            }
-            else if (!Number.isFinite(product.quantity)) {
-                throw new Error(`Ошибка, вы ввели не число в количестве продукта ${product.name}`);
-            }
-            else if (product.price <= 0) {
-                throw new Error(`Введена неверная стоимость продукта ${product.name}`);
-            }
-            else if (product.quantity <= 0) {
-                throw new Error(`Указано некорректное количество продукта ${product.name}`);
-            }
-        });
-
-        totalPrice = this.products.reduce(function (sum, product) {
-            return sum + product.price * product.quantity
-        }, 0)
-        
-        return `Общая сумма заказа: ${totalPrice}`;
+        return this.products.reduce((totalPrice, product) => totalPrice + (product.price * product.quantity), 0);
     }
 }
 
@@ -123,4 +173,3 @@ const product2 = new Product("Headphones", 100, 1);
 order.addProduct(product2);
 
 console.log(order.getTotalPrice());
-
