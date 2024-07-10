@@ -7,7 +7,7 @@
 // Работа должна быть выполнена с API: https://reqres.in/
 
 async function getUserData(ID) {
-    const response = await fetch('https://reqres.in/api/users?page=2');
+    const response = await fetch(`https://reqres.in/api/users?page=2/${ID}`);
     if (response.ok && response.status === 200) {
         const dataObj = await response.json();
         const obj = dataObj.data.find(element => element.id === ID);
@@ -48,7 +48,7 @@ const user = {
 // Работа должна быть выполнена с API: https://reqres.in/
 
 async function saveUserData(user) {
-    let response = await fetch('https://reqres.in/api/users', {
+    const response = await fetch('https://reqres.in/api/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -58,7 +58,7 @@ async function saveUserData(user) {
     if (!response.ok) {
         throw new Error('Сервер ответил ошибкой');
     }
-    let result = await response.json();
+    const result = await response.json();
     return result;
 }
 
