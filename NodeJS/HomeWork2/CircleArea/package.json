@@ -1,0 +1,20 @@
+{
+  "name": "circle-area",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": [
+    "area of circle",
+    "circle",
+    "area",
+    "math",
+    "function"
+  ],
+  "author": "green-world",
+  "license": "ISC",
+  "description": "calculate the area of a circle",
+  "repository": {}
+}

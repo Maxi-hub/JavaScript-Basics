@@ -1,0 +1,23 @@
+{
+  "name": "random-book",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "go": "node ./index.js"
+  },
+  "keywords": [
+    "random",
+    "generate",
+    "book",
+    "read",
+    "read the book",
+    "random generation",
+    "math",
+    "function"
+  ],
+  "author": "green-world",
+  "license": "ISC",
+  "description": "generate random book",
+  "repository": {}
+}
