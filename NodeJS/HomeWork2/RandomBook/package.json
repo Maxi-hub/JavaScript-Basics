@@ -1,5 +1,5 @@
 {
-  "name": "random-book",
+  "name": "generate-random-book",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -19,5 +19,8 @@
   "author": "green-world",
   "license": "ISC",
   "description": "generate random book",
-  "repository": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxi-hub/JavaScript-Basics.git#main"
+  }
 }

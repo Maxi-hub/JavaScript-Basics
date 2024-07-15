@@ -1,5 +1,5 @@
 {
-  "name": "circle-area",
+  "name": "area-of-the-circle",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -16,5 +16,8 @@
   "author": "green-world",
   "license": "ISC",
   "description": "calculate the area of a circle",
-  "repository": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxi-hub/JavaScript-Basics.git#main"
+  }
 }
