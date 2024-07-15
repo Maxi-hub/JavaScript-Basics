@@ -19,20 +19,20 @@
 function getRandomBook() {
     let library = [
         {
-            name: "book1",
-            author: "Alex"
+            name: "Fahrenheit 451",
+            author: "Ray Bradbury"
         },
         {
-            name: "book2",
-            author: "Nommy"
+            name: "The catcher in the rye",
+            author: "Jerome David Salinger"
         },
         {
-            name: "book3",
-            author: "Peter"
+            name: "Little Prince",
+            author: "Antoine de Saint-Exupery"
         },
         {
-            name: "book4",
-            author: "OLga"
+            name: "War and Peace",
+            author: "graf Leo Tolstoy"
         },
     ];
 
@@ -40,11 +40,11 @@ function getRandomBook() {
         if (library.length > 0) {
             let randomIndex = Math.floor(Math.random() * library.length);
             let randomBook = library[randomIndex];
-            console.log(`Сегодня начнем читать книгу имя:${randomBook.name} автор: ${randomBook.author}`);
+            console.log(`Let's start reading the book today name:${randomBook.name} author: ${randomBook.author}`);
             library = library.filter(book => book !== randomBook);
             console.log(library);
         } else {
-            console.log("Книг в библиотеке больше не осталось, все прочитано.");
+            console.log("There are no more books in the library, everything is read.");
         }
     }
 }
