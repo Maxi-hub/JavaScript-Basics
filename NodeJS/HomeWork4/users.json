@@ -1,0 +1,16 @@
+[
+    {
+        "id": "4bfd0c69-7b15-45d4-889c-116e2d02049d",
+        "firstName": "Fill",
+        "secondName": "Barnaby",
+        "age": 42,
+        "city": "London"
+    },
+    {
+        "id": "82e9761b-558b-4668-adcb-82d3d26ef398",
+        "firstName": "Bob",
+        "secondName": "Banaby",
+        "age": 22,
+        "city": "Rom"
+    }
+]
