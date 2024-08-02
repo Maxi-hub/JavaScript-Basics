@@ -29,9 +29,9 @@ function listProduct() {
         reviewsBox.appendChild(productList);
 
     }
-    const ulElements = document.querySelectorAll('ul');  //[ul, ul]
+    const ulElements = document.querySelectorAll('ul'); 
     ulElements.forEach(element => {
-        element.addEventListener('click', () => { // ul
+        element.addEventListener('click', () => { 
             const elementReviews = localStorage.getItem(element.className).split(',');
             elementReviews.forEach(review => {
                 const listItem = document.createElement('li');
