@@ -13,46 +13,58 @@ const productNameEL = document.querySelector('.input-productname');
 const reviewEl = document.querySelector('.input-review');
 const buttonAdd = document.querySelector('.add-button');
 const buttonRemove = document.querySelector('.remove-button');
-const reviewsBox = document.createElement('div');
-document.body.appendChild(reviewsBox);
+const info = document.querySelector('.info');
+const reviewsBox = document.querySelector('.reviews-box');
 
-const info = document.createElement('div');
-reviewsBox.appendChild(info);
 
 let product = localStorage.getItem(productNameEL.value) || [];
 
 function listProduct() {
+    reviewsBox.innerHTML = '';
     for (let i = 0; i < localStorage.length; i++) {
+        const productKey = localStorage.key(i);
         const productList = document.createElement('ul');
-        productList.className = localStorage.key(i);
-        productList.textContent = localStorage.key(i);
+        productList.className = productKey;
+        productList.textContent = productKey;
         reviewsBox.appendChild(productList);
+
     }
+    const ulElements = document.querySelectorAll('ul');  //[ul, ul]
+    ulElements.forEach(element => {
+        element.addEventListener('click', () => { // ul
+            const elementReviews = localStorage.getItem(element.className).split(',');
+            elementReviews.forEach(review => {
+                const listItem = document.createElement('li');
+                listItem.textContent = review;
+                element.appendChild(listItem);
+                const removeReview = document.createElement('button');
+                removeReview.textContent = "Удалить отзыв";
+                element.appendChild(removeReview);
+
+                removeReview.addEventListener('click', () => {
+                    const updatedReviews = elementReviews.filter(reviewElem => reviewElem !== review);
+                    localStorage.setItem(element.className, updatedReviews.join(','));
+                    listProduct();
+                });
+            });
+        }, { once: true })
+
+
+    });
 }
 
-    // productList.addEventListener('click', () => {
-    //     product = [localStorage.getItem(productList.className)];
-    //     product.map(item => {
-    //         const listItem = document.createElement('li');
-    //         listItem.textContent = item;
-    //         productList.appendChild(listItem);
-    //         const removeReview = document.createElement('button');
-    //         removeReview.textContent = "Удалить отзыв";
-    //         productList.appendChild(removeReview);
-    //     })
-    // }
-    // );
+listProduct();
 
 const updateProductReviews = () => {
-    info.innerHTML = '';
+    info.textContent = '';
     if (reviewEl.value.trim() === '') {
-        return info.innerHTML = 'Введите отзыв';
+        return info.textContent = 'Введите отзыв';
     }
     if (localStorage.getItem(productNameEL.value.trim()) !== null) {
         product = [localStorage.getItem(productNameEL.value)];
         product.push(reviewEl.value);
-        info.innerHTML = 'Отзыв на продукт добавлен';
         reviewEl.value = '';
+        info.textContent = 'Отзыв на продукт добавлен';
     }
     localStorage.setItem(productNameEL.value, product);
     listProduct();
@@ -61,15 +73,15 @@ const updateProductReviews = () => {
 
 buttonAdd.addEventListener('click', () => {
     if (productNameEL.value.trim() === '') {
-        reviewsBox.textContent = 'Введите название продукта';
+        return reviewsBox.textContent = 'Введите название продукта';
     } else if (reviewEl.value.trim() === '') {
-        reviewsBox.textContent = 'Введите отзыв';
+        return reviewsBox.textContent = 'Введите отзыв';
     } else if (productNameEL.value.trim() !== '' && localStorage.getItem(productNameEL.value.trim()) === null) {
         reviewsBox.textContent = '';
         localStorage.setItem(productNameEL.value, reviewEl.value);
 
         product.push(reviewEl.value.trim());
-        info.innerHTML = 'Отзыв на продукт добавлен';
+        info.textContent = 'Отзыв на продукт добавлен';
         reviewEl.value = '';
         listProduct();
         return (product, reviewsBox);
@@ -81,10 +93,12 @@ updateProductReviews();
 
 
 buttonRemove.addEventListener('click', function (e) {
-    localStorage.removeItem(productNameEL.value);
-    info.innerHTML = 'Продукт удален!';
+    if (localStorage.getItem(productNameEL.value)) {
+        localStorage.removeItem(productNameEL.value);
+        info.textContent = `Продукт ${productNameEL.value} удален!`;
+        productNameEL.value = '';
+        listProduct();
+    } else {
+        info.textContent = 'Продукт не найден!';
+    }
 });
-
-
-
-
