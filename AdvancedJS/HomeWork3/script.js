@@ -21,34 +21,41 @@ reviewsBox.appendChild(info);
 
 let product = localStorage.getItem(productNameEL.value) || [];
 
-for (let i = 0; i < localStorage.length; i++) {
-    const productList = document.createElement('ul');
-    productList.className = localStorage.key(i);
-    productList.textContent = localStorage.key(i);
-    reviewsBox.appendChild(productList);
-
-    productList.addEventListener('click', () => {
-        // product.forEach(item => { // 1,2,3
-        //     const listItem = document.createElement('li');
-        //     listItem.textContent = item;
-        //     productList.appendChild(listItem);
-        // });
-    });
+function listProduct() {
+    for (let i = 0; i < localStorage.length; i++) {
+        const productList = document.createElement('ul');
+        productList.className = localStorage.key(i);
+        productList.textContent = localStorage.key(i);
+        reviewsBox.appendChild(productList);
+    }
 }
 
-
+    // productList.addEventListener('click', () => {
+    //     product = [localStorage.getItem(productList.className)];
+    //     product.map(item => {
+    //         const listItem = document.createElement('li');
+    //         listItem.textContent = item;
+    //         productList.appendChild(listItem);
+    //         const removeReview = document.createElement('button');
+    //         removeReview.textContent = "Удалить отзыв";
+    //         productList.appendChild(removeReview);
+    //     })
+    // }
+    // );
 
 const updateProductReviews = () => {
     info.innerHTML = '';
-
+    if (reviewEl.value.trim() === '') {
+        return info.innerHTML = 'Введите отзыв';
+    }
     if (localStorage.getItem(productNameEL.value.trim()) !== null) {
         product = [localStorage.getItem(productNameEL.value)];
         product.push(reviewEl.value);
-        info.textContent = 'Отзыв на продукт добавлен';
+        info.innerHTML = 'Отзыв на продукт добавлен';
         reviewEl.value = '';
-
     }
     localStorage.setItem(productNameEL.value, product);
+    listProduct();
 }
 
 
@@ -58,11 +65,13 @@ buttonAdd.addEventListener('click', () => {
     } else if (reviewEl.value.trim() === '') {
         reviewsBox.textContent = 'Введите отзыв';
     } else if (productNameEL.value.trim() !== '' && localStorage.getItem(productNameEL.value.trim()) === null) {
+        reviewsBox.textContent = '';
         localStorage.setItem(productNameEL.value, reviewEl.value);
 
         product.push(reviewEl.value.trim());
         info.innerHTML = 'Отзыв на продукт добавлен';
         reviewEl.value = '';
+        listProduct();
         return (product, reviewsBox);
     }
     updateProductReviews();
