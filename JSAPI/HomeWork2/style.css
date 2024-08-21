@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 350px;
+    margin: 100px auto 100px;
+    width: 700px;
+    text-align: center;
+}
+
+.items {
+    background-color: #ddd;
+    height: inherit;
+    width: inherit;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+}
+
+.inputs {
+    margin: 20px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buttons {
+    padding: 10px;
+    display: flex;
+    gap: 55px;
+    justify-content: center;
+}
+
+.button {
+    box-sizing: content-box;
+    width: 202px;
+    height: 40px;
+}
