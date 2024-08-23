@@ -43,6 +43,7 @@
         // 6. Все изменения (запись, отмена записи) должны сохраняться и отображаться в реальном времени на странице.
         // 7. При разработке используйте Bootstrap для стилизации элементов.
 
+
         const data = [
             {
                 "title": "Гимнастика",
@@ -62,11 +63,11 @@
                 "maxAmount": 20,
                 "currentAmount": 20
             }
-        ]
+        ];
 
         const disciplineList = document.querySelector('ul');
 
-        data.forEach(element => {
+        data.forEach((element, index) => {
             const sportDiscipline = document.createElement('li');
             sportDiscipline.classList.add('sport-discipline');
 
@@ -75,11 +76,11 @@
 
             const sportTime = document.createElement('p');
             sportTime.classList.add('time-start');
-            sportTime.textContent = `Время занятий ${element.time}`;
+            sportTime.textContent = `Время занятий: ${element.time}`;
 
             const maxAmount = document.createElement('p');
             maxAmount.classList.add('max-amount');
-            maxAmount.textContent = `Максиммальное количество в группе: ${element.maxAmount}`;
+            maxAmount.textContent = `Максимальное количество в группе: ${element.maxAmount}`;
 
             const currentAmount = document.createElement('p');
             currentAmount.classList.add('current-amount');
@@ -98,58 +99,45 @@
             info.style.paddingTop = '10px';
 
             sportDiscipline.append(sportTitle, sportTime, maxAmount, currentAmount, bookingButton, cancelButton, info);
-            disciplineList.append(sportDiscipline);
-        });
+            disciplineList.appendChild(sportDiscipline);
 
-        const bookingBtns = document.querySelectorAll('.booking-button');
-        bookingBtns.forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                const sportDiscipline = e.target.closest('li');
-                const cancelBtn = sportDiscipline.querySelector('.cancel-button');
-                const sportTitle = sportDiscipline.firstChild.textContent;
+            // Проверка состояния при загрузке страницы
+            const registrationState = localStorage.getItem(`registered-${index}`);
+            if (registrationState === 'true') {
+                bookingButton.disabled = true;
+                cancelButton.disabled = false;
+                currentAmount.textContent = `Записано в группу: ${element.currentAmount + 1}`;
+                info.textContent = `Вы записались на дисциплину "${element.title}"`;
+            } else {
+                bookingButton.disabled = element.currentAmount >= element.maxAmount;
+                cancelButton.disabled = true;
+            }
 
-                const currentAmount = sportDiscipline.querySelector('.current-amount');
-                const maxAmount = sportDiscipline.querySelector('.max-amount');
-                const info = sportDiscipline.querySelector('.info');
-
-                let max = parseInt(maxAmount.textContent.match(/\d+/)[0], 10);
+            bookingButton.addEventListener('click', function () {
                 let current = parseInt(currentAmount.textContent.match(/\d+/)[0], 10);
+                const max = parseInt(maxAmount.textContent.match(/\d+/)[0], 10);
 
                 if (current < max) {
-                    currentAmount.textContent = `Записано в группу: ${current += 1}`;
-                    btn.disabled = true;
-                    cancelBtn.disabled = false;
-                    info.textContent = `Вы записались на дисциплину "${sportTitle}"`;
-                } else if (current === max) {
-                    btn.disabled = true;
-                    cancelBtn.disabled = true;
-                    info.textContent = 'Запись завершена';
+                    currentAmount.textContent = `Записано в группу: ${current + 1}`;
+                    bookingButton.disabled = true;
+                    cancelButton.disabled = false;
+                    info.textContent = `Вы записались на дисциплину "${element.title}"`;
+                    localStorage.setItem(`registered-${index}`, 'true');
                 }
             });
-        });
 
-        const cancelBtns = document.querySelectorAll('.cancel-button');
-        cancelBtns.forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                const sportDiscipline = e.target.closest('li');
-                const bookBtn = sportDiscipline.querySelector('.booking-button');
-
-                const currentAmount = sportDiscipline.querySelector('.current-amount');
-                const maxAmount = sportDiscipline.querySelector('.max-amount');
-                const info = sportDiscipline.querySelector('.info');
-
-                let max = parseInt(maxAmount.textContent.match(/\d+/)[0], 10);
+            cancelButton.addEventListener('click', function () {
                 let current = parseInt(currentAmount.textContent.match(/\d+/)[0], 10);
 
                 if (current > 0) {
-                    currentAmount.textContent = `Записано в группу: ${current -= 1}`;
-                    btn.disabled = true;
-                    bookBtn.disabled = false;
+                    currentAmount.textContent = `Записано в группу: ${current - 1}`;
+                    bookingButton.disabled = false;
+                    cancelButton.disabled = true;
                     info.textContent = 'Запись отменена';
+                    localStorage.setItem(`registered-${index}`, 'false');
                 }
             });
         });
-
     </script>
 </body>
 
