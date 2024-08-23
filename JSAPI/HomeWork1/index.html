@@ -97,14 +97,8 @@
             info.classList.add('info');
             info.style.paddingTop = '10px';
 
+            sportDiscipline.append(sportTitle, sportTime, maxAmount, currentAmount, bookingButton, cancelButton, info);
             disciplineList.append(sportDiscipline);
-            sportDiscipline.append(sportTitle);
-            sportDiscipline.append(sportTime);
-            sportDiscipline.append(maxAmount);
-            sportDiscipline.append(currentAmount);
-            sportDiscipline.append(bookingButton);
-            sportDiscipline.append(cancelButton);
-            sportDiscipline.append(info);
         });
 
         const bookingBtns = document.querySelectorAll('.booking-button');
@@ -126,7 +120,7 @@
                     btn.disabled = true;
                     cancelBtn.disabled = false;
                     info.textContent = `Вы записались на дисциплину "${sportTitle}"`;
-                } else if (current = max) {
+                } else if (current === max) {
                     btn.disabled = true;
                     cancelBtn.disabled = true;
                     info.textContent = 'Запись завершена';
@@ -146,8 +140,6 @@
 
                 let max = parseInt(maxAmount.textContent.match(/\d+/)[0], 10);
                 let current = parseInt(currentAmount.textContent.match(/\d+/)[0], 10);
-
-                window.history.back();
 
                 if (current > 0) {
                     currentAmount.textContent = `Записано в группу: ${current -= 1}`;
