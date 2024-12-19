@@ -9,7 +9,7 @@ const prevBtn = document.querySelector('.button-previous');
 const nextBtn = document.querySelector('.button-next');
 
 let index = 0;
-// items.innerHTML = `<img src=${images[index]}>`
+items.innerHTML = `<img src=${images[index]}>`
 
 // inputs.forEach((input, index) => {
 //     input.addEventListener('change', function (e) {
