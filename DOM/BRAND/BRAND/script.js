@@ -10,6 +10,7 @@ async function fetchData(url) {
     }
 }
 
+
 document.addEventListener("DOMContentLoaded", async () => {
     // localStorage.clear();
     const data = await fetchData(url);
@@ -71,18 +72,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         })
     })
-
-    const headingBucketBox = document.querySelector('.heading__bucket-box');
-    headingBucketBox.addEventListener("click", ev => {
-        if (ev.target.closest('.heading__bucket-close')) {
-            const item = ev.target.closest(".heading__bucket-items");
-            if (item) {
-                item.remove();
-                localStorage.removeItem(item.dataset.id);
-            }
-        }
-    })
-
 });
 
 

@@ -24,38 +24,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <img class="product__info-img" src="img/button_close.png" alt="">
                 </div>
             </div>`);
-
-
-            headingBucketBox.insertAdjacentHTML('afterbegin', `
-                <div class="heading__bucket-items" data-id="${obj.id}">
-                    <a href="single_page.html">
-                        <img class="heading__bucket-item" src="${obj.img}" alt=""></img>
-                    </a>
-                    <div class="heading__bucket-text">
-                        <h5 class="heading__bucket-title">${obj.title}</h5>
-                        <img class="heading__bucket-stars" src="img/stars.png" alt=""></img>
-                        <p class="heading__bucket-price">${obj.count} x $${obj.price}</p>
-                    </div>
-                    <img class="heading__bucket-close" src="img/button_close.png" alt=""></img>
-                </div>
-                `
-            );
         }
     }
 });
-
-
-
-headingBucketBox.addEventListener("click", ev => {
-    if (ev.target.closest('.heading__bucket-close')) {
-        const item = ev.target.closest(".heading__bucket-items");
-        if (item) {
-            item.remove();
-            localStorage.removeItem(item.dataset.id);
-        }
-    }
-})
-
 
 
 shoppingCart.addEventListener("click", ev => {
