@@ -33,6 +33,7 @@ let currentLike = 0;
 
 const getLastPhotoButton = document.createElement('button');
 getLastPhotoButton.textContent = 'Посмотреть фотографии предыдущих дней';
+getLastPhotoButton.className = 'prevFotosButton';
 photoContainer.append(getLastPhotoButton);
 
 let objs = Object.entries(localStorage);
