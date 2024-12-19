@@ -10,6 +10,11 @@
     text-align: center;
 }
 
+.title {
+    margin-bottom: 30px;
+    color: rgb(93, 92, 92);
+}
+
 .items {
     background-color: #ddd;
     height: inherit;
@@ -36,4 +41,5 @@
     box-sizing: content-box;
     width: 202px;
     height: 40px;
+    background-color: orange;
 }
