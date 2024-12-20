@@ -26,16 +26,3 @@ Hi! In this project, I have completed several tasks related to manipulating clas
 6. I added the `data-dd` attribute with a value of 3 to the element that has the `aria-labelledby` attribute equal to 'dropdownMenuButton' using the `dataset` property. This allows you to add custom attributes to the elements.
 7. I removed the `type` attribute from the "dropdown-toggle" class element, which demonstrates the ability to manage element attributes.
 
-
-
-
-
-
-
-## Выполненные задания
-
-
-
-## Заключение
-
-Этот проект демонстрирует мои навыки в манипуляции классами и атрибутами элементов DOM с помощью JavaScript. Я надеюсь, что он будет полезен для других разработчиков, которые хотят изучить эти концепции!
