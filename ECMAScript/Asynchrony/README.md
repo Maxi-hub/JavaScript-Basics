@@ -1,6 +1,6 @@
-## Работа с API и динамическое изменение стилей в JavaScript / Working with the API and dynamically changing styles in JavaScript
+# Работа с API и динамическое изменение стилей в JavaScript / Working with the API and dynamically changing styles in JavaScript
 
-# Описание выполненных заданий / Description of completed tasks
+## Описание выполненных заданий / Description of completed tasks
 
 Делюсь с вами результатами своей работы над тремя заданиями, которые касаются получения и отправки данных о пользователе, а также изменения стиля элемента на веб-странице.
 I am sharing with you the results of my work on three tasks that relate to receiving and sending user data, as well as changing the style of an element on a web page.
