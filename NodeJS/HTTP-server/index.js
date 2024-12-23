@@ -1,9 +1,3 @@
-// Напишите HTTP сервер и реализуйте два обработчика, где:
-// — По URL “/” будет возвращаться страница, на которой есть гиперссылка на вторую страницу по ссылке “/about”
-// — А по URL “/about” будет возвращаться страница, на которой есть гиперссылка на первую страницу “/”
-// — Также реализуйте обработку несуществующих роутов (404).
-// — * На каждой странице реализуйте счетчик просмотров. Значение счетчика должно увеличиваться на единицу каждый раз, когда загружается страница.
-
 const http = require('http');
 const additionalInfo = [
     {
@@ -35,16 +29,16 @@ http.createServer((req, res) => {
         });
 
         let htmlContent = '<h1>Добро пожаловать на мой сайт</h1>';
-        htmlContent += `<a href="${additionalInfo[0].text}">${additionalInfo[0].title}</a><br>`;
-        htmlContent += `Просмотров: ${counter1()}`;
+        htmlContent += `<a style="text-decoration: none" href="${additionalInfo[0].text}">${additionalInfo[0].title}</a>`;
+        htmlContent += `<p> Просмотров: ${counter1()}</p>`;
         res.end(htmlContent);
     } else if (req.url === '/about') {
         res.writeHead(200, {
             'Content-Type': 'text/html; charset=UTF-8',
         })
         let htmlContent = '<h1>Страница about</h1>';
-        htmlContent += `<a href="${additionalInfo[1].text}">${additionalInfo[1].title}</a><br>`;
-        htmlContent += `Просмотров: ${counter2()}`;
+        htmlContent += `<a style="text-decoration: none" href="${additionalInfo[1].text}">${additionalInfo[1].title}</a>`;
+        htmlContent += `<p> Просмотров: ${counter2()}</p>`;
         res.end(htmlContent);
     } else {
         res.writeHead(404, {
@@ -55,4 +49,3 @@ http.createServer((req, res) => {
 }).listen(3000, () => {
     console.log(`Сервер запущен на порту 3000`);
 });
-
